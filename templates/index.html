@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artists</title>
+    <link rel="stylesheet" href="/static/index.css" />
+    <link rel="stylesheet" href="/static/media.css">
+  </head>
+  <body>
+    <h2>Welcome to Groupie Tracker!</h2>
+    <h2>Enjoy exploring the world of music!</h2>
+    <div class="search-container">
+      <input
+        type="text"
+        id="search-input"
+        onkeyup="onInput()"
+        placeholder="Search..."
+      />
+      <ul class="hidden" id="results"></ul>
+      <div class="info-search-container">
+        <span onmouseover="showInfo()" onmouseout="hideInfo()">
+          <svg
+            class="info-svg"
+            width="44px"
+            height="44px"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                class="info-svg-path"
+                fill="#ffffff"
+                fill-rule="evenodd"
+                d="M10 3a7 7 0 100 14 7 7 0 000-14zm-9 7a9 9 0 1118 0 9 9 0 01-18 0zm8-4a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm.01 8a1 1 0 102 0V9a1 1 0 10-2 0v5z"
+              ></path>
+            </g>
+          </svg>
+        </span>
+        <div class="info-search-text hidden">
+          Search for artists/bands, concerts, creation date or first album
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="form-container">
+        <form class="form-filter" action="/filter" method="post">
+          {{if .}}{{range .Filter}}
+          {{if .Minmax}}
+          {{if ne .Name "LocationDates"}}
+          <div class="range_container">
+            <button onclick="event.preventDefault()" class="accordion">{{.Label}}</button>
+            <div class="panel">
+              <div class="form_control_wrapper">
+                <div class="form_control">
+                  <div class="form_control_container">
+                    <input
+                      name="{{.Name}}_min"
+                      class="form_control_container__time__input input"
+                      type="number"
+                      id="{{.Name}}_min"
+                      {{if index .MMValues "min"}}
+                      value="{{index .MMValues "min"}}"
+                      {{else}}
+                      value="1958"
+                      {{end}}
+                      min="1958"
+                      max="2030"
+                    />
+                  </div>
+                  <div class="form_control_container">
+                    <input
+                      name="{{.Name}}_max"
+                      class="form_control_container__time__input input"
+                      type="number"
+                      id="{{.Name}}_max"
+                      {{if index .MMValues "max"}}
+                      value="{{index .MMValues "max"}}"
+                      {{else}}
+                      value="2023"
+                      {{end}}
+                      min="1959"
+                      max="2030"
+                    />
+                  </div>
+                </div>
+                <div class="sliders_control">
+                  <input
+                    id="{{.Name}}-slider_min"
+                    type="range"
+                    {{if index .MMValues "min"}}
+                    value="{{index .MMValues "min"}}"
+                    {{else}}
+                    value="1958"
+                    {{end}}
+                    min="1958"
+                    max="2030"
+                  />
+                  <input
+                    id="{{.Name}}-slider_max"
+                    type="range"
+                    {{if index .MMValues "max"}}
+                    value="{{index .MMValues "max"}}"
+                    {{else}}
+                    value="2023"
+                    {{end}}
+                    min="1959"
+                    max="2030"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          {{else}}
+          <div class="ranges">
+            <button onclick="event.preventDefault()" class="accordion">{{.Label}}</button>
+          </label>
+          <div class="panel">
+            <div class="panel-container">
+              <input
+                onchange="document.querySelector('.form-filter').submit()"
+                id="{{printf "%v_%v" .Name "min"}}"
+                class="input"
+                name="{{.Name}}_min"
+                type="{{.Type}}"
+                min="{{index .Attributes "min"}}"
+                max="{{index .Attributes "max"}}"
+                placeholder="{{index .Attributes "min"}}"
+                {{if index .MMValues "min"}}
+                value="{{index .MMValues "min"}}"
+                {{end}}
+              />
+              <input
+                id="{{printf "%v_%v" .Name "max"}}"
+                class="input"
+                name="{{.Name}}_max"
+                type="{{.Type}}"
+                min="{{index .Attributes "min"}}"
+                max="{{index .Attributes "max"}}"
+                placeholder="{{index .Attributes "max"}}"
+                {{if index .MMValues "max"}} 
+                value="{{index .MMValues "max"}}"
+                {{end}}
+              />
+            </div>
+          </div>
+          </div>
+          {{end}}
+          {{end}}
+          {{if .Checkbox}}
+          <div>
+            <button onclick="event.preventDefault()" class="accordion">{{.Label}}</button>
+          <div class="panel">
+            <div class="checkboxes">
+            {{$value := .Values}}{{$name := .Name}}{{range .Boxes}}{{$box := .}}
+            <div class="checkbox-item">
+              <label 
+              class="label-members"
+              for="{{printf "%v_%v" $name $box}}">
+                {{$box}}
+              </label>
+              <input 
+              id="{{printf "%v_%v" $name $box}}" 
+              type="checkbox" 
+              name="{{$name}}" 
+              class="checkbox-members"
+              value="{{$box}}"
+              {{if index $value $box}} 
+              checked="checked"
+              {{end}} 
+              />
+            </div>
+            {{end}}
+            </div>
+          </div>
+          </div>
+          {{end}}
+          {{if .Options}}
+          <div>
+            <button onclick="event.preventDefault()" class="accordion">{{.Label}}</button>
+          <div class="panel">
+            <div class="panel-container">
+              <select class="input" name="{{.Name}}" id="">
+                {{$name := .Name}}
+                {{$values := .Values}}
+                {{range .Boxes}}
+                    {{$box := .}}
+                    {{if ne $box ""}}
+                        <option 
+                        name="{{$name}}" 
+                        id="{{printf "%v_%v" $name $box}}" 
+                        value="{{$box}}" 
+                        {{if index $values $box}}selected{{end}}
+                        >
+                          {{$box}}
+                        </option>
+                    {{else}}
+                        <option 
+                        name="{{$name}}" 
+                        id="{{printf "%v_%v" $name $box}}" 
+                        value="" 
+                        {{if index $values $box}}selected{{end}}
+                        >
+                          All {{printf "%v" $name}}
+                        </option>
+                    {{end}}
+                {{end}}
+              </select>
+            </div>
+          </div>
+          </div>
+          {{end}}
+          {{end}}
+          {{end}}
+          <div class="form-btns">
+              <button class="form-btn filter-btn">filter</button>
+              <a class="form-btn" href="/">clear</a>
+          </div>
+        </form>
+      </div>
+      <div class="cards-container">
+        {{if .Artists}} 
+        {{range .Artists}}
+        <div class="card">
+          <div class="img-container">
+            <img src="{{.Image}}" alt="" />
+          </div>
+          <h4>{{.Name}}</h4>
+          <a href="/artist/{{.Id}}">
+            <button class="card-button">learn more</button>
+          </a>
+        </div>
+        {{end}}
+        {{else}}
+        <h3 class="no-found">No artists found</h3>
+      </div>
+    </div>
+    {{end}}
+    <div class="overlay hidden"></div>
+    <span class="loader hidden">Loading</span>
+    <script src="/static/slider.js"></script>
+    <script src="/static/index.js"></script>
+  </body>
+</html>

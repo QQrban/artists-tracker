@@ -1,0 +1,161 @@
+.artist-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 55px;
+}
+
+.band-content {
+  display: flex;
+  gap: 15px;
+}
+
+.left-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.422);
+  padding: 15px;
+  color: white;
+  border: 2px solid rgb(69, 69, 69);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.516), 0 6px 20px rgba(0, 0, 0, 0.326);
+}
+
+#my-map {
+  width: 800px;
+  border: 2px solid rgb(69, 69, 69);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.516), 0 6px 20px rgba(0, 0, 0, 0.326);
+}
+
+.band-name {
+  font-size: 44px;
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.band-img {
+  max-width: 240px;
+  min-width: 240px;
+  border-radius: 50%;
+  border: 6px solid #cacaca;
+  overflow: hidden;
+}
+
+.band-history {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  gap: 25px;
+  justify-content: space-between;
+}
+
+.band-about {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 420px;
+}
+
+.band-history-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.band-history-heading {
+  font-size: 20px;
+}
+
+.band-history-value,
+.members-list {
+  font-size: 20px;
+  min-width: 220px;
+}
+
+.members-list li:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+ul .location-date::before {
+  content: '\2022';
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.home-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.home-btn button {
+  padding: 8px 16px;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.home-btn-label {
+  background-color: #fff;
+  position: absolute;
+  padding: 5px 10px;
+  font-size: 12px;
+  top: 60px;
+  left: 30px;
+}
+
+hr {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.location-dates-heading {
+  font-size: 24px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.514);
+  padding-bottom: 10px;
+}
+
+.location-dates-container {
+  margin-top: 20px;
+}
+
+.location-dates-city {
+  font-size: 18px;
+  color: white;
+  cursor: zoom-in;
+}
+
+.location-dates-city:hover {
+  color: #991b30db;
+}
+
+.location-dates-item {
+  display: flex;
+  gap: 65px;
+  justify-content: space-between;
+}
+
+.location-dates-item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.location-list {
+  gap: 8px;
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.location-date {
+  min-width: 160px;
+}

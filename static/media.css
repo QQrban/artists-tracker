@@ -1,0 +1,148 @@
+@media (max-width: 1440px) {
+  .wrapper {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1372px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cards-container {
+    align-self: auto;
+    margin-top: 25px;
+  }
+  .form-filter {
+    position: relative;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: row dense;
+  }
+  .accordion {
+    width: 295px;
+  }
+
+  .form-btns {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 1060px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+    min-width: auto;
+  }
+  .info-search-text {
+    left: auto;
+    right: 0;
+    top: auto;
+    bottom: -50px;
+    z-index: 5000;
+    background: #444444da;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 920px) {
+  .form-filter {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .form-btns {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 845px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    min-width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-filter {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+  .form-btns {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 553px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .info-search-container {
+    right: 5px;
+  }
+  .info-svg-path {
+    fill: #444444da;
+  }
+}
+
+/* Artists Page */
+
+@media (max-width: 1599px) {
+  .band-content {
+    flex-direction: column;
+  }
+  .left-info {
+    padding: 8px;
+  }
+  #my-map {
+    height: 600px;
+  }
+}
+
+@media (max-width: 839px) {
+  .left-info {
+    align-items: center;
+  }
+  .band-about {
+    min-width: 200px;
+  }
+
+  .band-history-value,
+  .members-list {
+    min-width: 200px;
+  }
+  .location-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #my-map {
+    width: auto;
+  }
+}
+
+@media (max-width: 734px) {
+  .band-history {
+    flex-direction: column;
+  }
+  .band-about {
+    min-width: 400px;
+  }
+  .band-history-value,
+  .members-list {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 671px) {
+  .artist-page {
+    padding-top: 90px;
+  }
+  .left-info {
+    order: 2;
+  }
+  #my-map {
+    order: 1;
+  }
+  .location-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
